@@ -3,14 +3,12 @@ public class Tank {
 	int x;
 	int y;
 	int direction = 2;
-	int speed = 1;
+	int speed;
 	boolean isAlive = true;
 	
 	public Tank(int x, int y) {
 		this.x = x;
 		this.y = y;
-		this.direction = 0;
-		this.speed = 1;
 	}
 
 	public int getDirection() {

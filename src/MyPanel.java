@@ -15,6 +15,10 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
 		hero.setSpeed(2);
 		for (int i = 0; i <enemyNum; i ++) {
 			Enemy enemy = new Enemy(30 * (i+1), 30);
+			enemy.direction = 2;
+			enemy.setSpeed(2);
+			Thread t = new Thread(enemy);
+			t.start();
 			enemies.add(enemy);
 		}
 	}
@@ -32,7 +36,8 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
 		}
 		for (int i = 0; i < enemies.size(); i++) {
 			if (enemies.get(i).isAlive) {
-				this.drawTank(enemies.get(i).getX(), enemies.get(i).getY(), g, 0, 1);
+				this.drawTank(enemies.get(i).getX(), enemies.get(i).getY(), g, enemies.get(i).getDirection(), 1);
+				
 			}
 		}
 		
@@ -89,12 +94,14 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
 				enemy.isAlive = false;
 				bullet.isAlive = false;
 			}
+			break;
 		case 1:
 		case 3:
 			if (bullet.x < enemy.x + 15 && bullet.x > enemy.x - 15 && bullet.y < enemy.y + 10 && bullet.y > enemy.y - 10) {
 				enemy.isAlive = false;
 				bullet.isAlive = false;
 			} 
+			break;
 		}
 	}
 	
@@ -124,11 +131,11 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
 			hero.setDirection(3);
 			hero.moveLeft();
 			break;
-		case ' ':
+		}
+		if (e.getKeyChar() == ' ') {
 			if (hero.bullets.size() < 5) {
 				hero.shoot();
 			}
-			break;
 		}
 		this.repaint();
 	}
