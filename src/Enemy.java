@@ -3,17 +3,12 @@ public class Enemy extends Tank implements Runnable {
 
 	public Enemy(int x, int y) {
 		super(x, y);
+		// super.shoot();
 	}
 
 	@Override
 	public void run() {
 		while (true) {
-			try {
-				Thread.sleep(50);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-
 			direction = (int) (Math.random() * 4);
 
 			switch (direction) {
@@ -24,7 +19,7 @@ public class Enemy extends Tank implements Runnable {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-					if (y > 20) {
+					if (y > 15) {
 						this.moveUp();
 					}
 				}
@@ -36,7 +31,7 @@ public class Enemy extends Tank implements Runnable {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-					if (this.x < 380) {
+					if (this.x < 385) {
 						this.moveRight();
 					}
 				}
@@ -67,6 +62,10 @@ public class Enemy extends Tank implements Runnable {
 				}
 
 				break;
+			}
+
+			if (this.bullets.size() < 3) {
+				this.shoot();
 			}
 
 			if (!isAlive) {

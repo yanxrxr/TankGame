@@ -2,7 +2,7 @@
 public class Bullet implements Runnable {
 	int x;
 	int y;
-	int speed = 2;
+	int speed;
 	int direction;
 	boolean isAlive = true;
 	
@@ -10,10 +10,10 @@ public class Bullet implements Runnable {
 		this.x = x;
 		this.y = y;
 		this.direction = direction;
+		this.speed = 5;
 	}
 	
 	public void run() {
-		// TODO Auto-generated method stub
 		while(true) {
 			try {
 				Thread.sleep(100);
