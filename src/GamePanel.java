@@ -26,11 +26,16 @@ public class GamePanel extends JPanel implements KeyListener, Runnable {
 			Enemy enemy = new Enemy(50 * (i + 1), 30);
 			enemy.direction = 2;
 			enemy.setSpeed(2);
+			
+			enemy.setEnemies(enemies);
+			
 			Thread t = new Thread(enemy);
 			t.start();
+			
 			enemy.shoot();
 			enemies.add(enemy);
 		}
+		
 		try {
 			explode1 = ImageIO.read(new File("img/explosion1.jpg"));
 			explode2 = ImageIO.read(new File("img/explosion2.jpg"));
