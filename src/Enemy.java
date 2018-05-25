@@ -19,11 +19,11 @@ public class Enemy extends Tank implements Runnable {
 		switch (this.direction) {
 		case 0:
 		case 2:
-			rect1 = new Rectangle(this.x - 10, this.y - 15, 30, 30);
+			rect1 = new Rectangle(this.x - 10, this.y - 15, 20, 30);
 			break;
 		case 1:
 		case 3:
-			rect1 = new Rectangle(this.x - 15, this.y - 10, 30, 30);
+			rect1 = new Rectangle(this.x - 15, this.y - 10, 30, 20);
 			break;
 
 		}
@@ -32,14 +32,16 @@ public class Enemy extends Tank implements Runnable {
 				switch (enemy.direction) {
 				case 0:
 				case 2:
-					rect2 = new Rectangle(enemy.x - 10, enemy.y - 15, 30, 30);
+					rect2 = new Rectangle(enemy.x - 10, enemy.y - 15, 20, 30);
 					break;
 				case 1:
 				case 3:
-					rect2 = new Rectangle(enemy.x - 15, enemy.y - 10, 30, 30);
+					rect2 = new Rectangle(enemy.x - 15, enemy.y - 10, 30, 20);
 					break;
 				}
-				return rect1.intersects(rect2);
+				if (rect1.intersects(rect2)) {
+					return true;
+				}
 			}
 		}
 		return false;
@@ -58,7 +60,7 @@ public class Enemy extends Tank implements Runnable {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-					if (y > 15 && !isCollided(this.enemies)) {
+					if (y > 15 && !isCollided(enemies)) {
 						this.moveUp();
 					}
 				}
@@ -70,7 +72,7 @@ public class Enemy extends Tank implements Runnable {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-					if (this.x < 385 && !isCollided(this.enemies)) {
+					if (this.x < 385 && !isCollided(enemies)) {
 						this.moveRight();
 					}
 				}
@@ -82,7 +84,7 @@ public class Enemy extends Tank implements Runnable {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-					if (this.y < 285 && !isCollided(this.enemies)) {
+					if (this.y < 285 && !isCollided(enemies)) {
 						this.moveDown();
 					}
 				}
@@ -95,7 +97,7 @@ public class Enemy extends Tank implements Runnable {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-					if (this.x > 15 && !isCollided(this.enemies)) {
+					if (this.x > 15 && !isCollided(enemies)) {
 						this.moveLeft();
 					}
 				}
